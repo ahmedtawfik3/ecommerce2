@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { Product } from "@/services/products";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/context/WishlistContext";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
@@ -21,10 +21,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [addedWishlist, setAddedWishlist] = useState(false);
 
   const imageUrl =
-    product.image
-      ? product.image.startsWith("http")
-        ? product.image
-        : `https://ecommerce.routemisr.com${product.image}`
+    product.imageCover
+      ? product.imageCover.startsWith("http")
+        ? product.imageCover
+        : `https://ecommerce.routemisr.com${product.imageCover}`
       : product.images && product.images.length > 0
       ? product.images[0].startsWith("http")
         ? product.images[0]
@@ -45,7 +45,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-      
       <a href={`/products/${product._id}`} className="block">
         <div className="overflow-hidden">
           <img

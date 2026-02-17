@@ -1,4 +1,4 @@
-import api from "./api";
+import { api } from "@/lib/api";
 
 export const getAddresses = async () => {
   const res = await api.get("/api/v1/addresses");

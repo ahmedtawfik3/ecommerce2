@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getProductById, Product } from "@/services/products";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/context/WishlistContext";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 
 export default function ProductDetailsPage() {

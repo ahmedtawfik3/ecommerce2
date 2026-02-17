@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/hooks/useCart";
 
 export default function SuccessPage() {
   const router = useRouter();

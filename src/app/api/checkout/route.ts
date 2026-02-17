@@ -10,8 +10,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: "2023-10-16",
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+      apiVersion: "2026-01-28.clover",
     });
 
     const body = await req.json();
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     const lineItems = body.items.map((item: any) => ({
       price_data: {
-        currency: "usd", 
+        currency: "usd",
         product_data: {
           name: item.name,
         },
@@ -44,8 +44,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    console.error("Stripe Error:", error.message);
-
     return NextResponse.json(
       { error: error.message || "Something went wrong" },
       { status: 500 }

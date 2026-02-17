@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/hooks/useAuth";
+import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/context/WishlistContext";
 
 export default function Navbar() {

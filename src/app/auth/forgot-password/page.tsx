@@ -9,7 +9,7 @@ export default function ForgotPasswordPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await forgotPassword({ email });
+      await forgotPassword(email);
       setMessage("Check your email for reset code!");
     } catch (err) {
       console.log(err);
@@ -20,7 +20,11 @@ export default function ForgotPasswordPage() {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Forgot Password</h1>
-      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <button type="submit">Send Reset Code</button>
       {message && <p>{message}</p>}
     </form>

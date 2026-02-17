@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 
 interface User {
   name: string;
@@ -14,7 +14,7 @@ interface AuthContextType {
   signup: (name: string, email: string, password: string) => boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const STORAGE_KEY = "shopmart_users";
 const STORAGE_CURRENT = "shopmart_current_user";
@@ -29,7 +29,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = (email: string, password: string) => {
     const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]") as any[];
-    const found = users.find(u => u.email === email && u.password === password);
+    const found = users.find(
+      (u) => u.email === email && u.password === password
+    );
     if (found) {
       const { name, email } = found;
       const currentUser = { name, email };
@@ -42,7 +44,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = (name: string, email: string, password: string) => {
     const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]") as any[];
-    if (users.some(u => u.email === email)) return false;
+    if (users.some((u) => u.email === email)) return false;
     users.push({ name, email, password });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
     return true;
@@ -53,16 +55,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(STORAGE_CURRENT);
   };
 
-  
   return (
     <AuthContext.Provider value={{ user, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
-  return context;
 }

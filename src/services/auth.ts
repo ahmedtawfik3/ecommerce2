@@ -36,3 +36,12 @@ export const resetPassword = async (email: string, newPassword: string) => {
   });
   return res.data;
 };
+
+export const changePassword = async (data: {
+  currentPassword: string;
+  password: string;
+  rePassword: string;
+}) => {
+  const res = await api.put("/auth/changeMyPassword", data);
+  return res.data;
+};
